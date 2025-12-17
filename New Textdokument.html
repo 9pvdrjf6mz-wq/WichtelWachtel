@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jury Experience – Einladung</title>
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: #131a2a;
+      --accent: #ffd166;
+      --accent2: #ef476f;
+      --text: #e9edf5;
+      --muted: #9aa8bd;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1200px 800px at 20% 0%, #0f1430, var(--bg));
+      color: var(--text); min-height: 100vh; display: grid; place-items: center; padding: 24px;
+    }
+    .container { max-width: 720px; width: 100%; }
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02) 40%), var(--card);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 28px; box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      backdrop-filter: blur(8px);
+    }
+    h1 { font-size: 1.9rem; margin: 0 0 6px; letter-spacing: 0.5px; }
+    .subtitle { color: var(--muted); margin-bottom: 18px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255, 209, 102, 0.12); color: var(--accent);
+      border: 1px solid rgba(255, 209, 102, 0.28);
+      padding: 8px 12px; border-radius: 999px; font-weight: 600; font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+    .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .riddle {
+      background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.14);
+      border-radius: 12px; padding: 16px; line-height: 1.55;
+    }
+    .clue { color: var(--muted); font-size: 0.98rem; }
+    .inputRow { display: flex; gap: 10px; margin-top: 12px; }
+    input[type=text] {
+      flex: 1; padding: 12px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06); color: var(--text);
+      outline: none;
+    }
+    button {
+      padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.18);
+      background: linear-gradient(180deg, #ffd166, #fcbf49); color: #1a1a1a; font-weight: 700;
+      cursor: pointer;
+    }
+    button.secondary { background: rgba(255,255,255,0.08); color: var(--text); }
+    .status { margin-top: 10px; font-weight: 600; }
+    .hint { color: var(--accent2); }
+    .success {
+      display: none; margin-top: 18px; padding: 16px; border-radius: 12px;
+      background: rgba(76, 201, 91, 0.12); border: 1px solid rgba(76, 201, 91, 0.35);
+    }
+    .footer { margin-top: 20px; color: var(--muted); font-size: 0.92rem; }
+    .logo {
+      width: 64px; height: 64px; border-radius: 14px; display: grid; place-items: center;
+      background: radial-gradient(120px 80px at 50% 20%, rgba(255, 209, 102, 0.18), rgba(255, 255, 255, 0.06));
+      border: 1px solid rgba(255,255,255,0.12); margin-bottom: 12px;
+    }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    .small { font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="logo" aria-hidden="true">⚖️</div>
+      <div class="badge">Vorladung – Nur für die Jury</div>
+      <h1>Die erste Prüfung deiner Urteilskraft</h1>
+      <div class="subtitle">Löse das Rätsel, um deine geheime Einladung zu entschlüsseln.</div>
+
+      <div class="grid">
+        <div class="riddle">
+          <p><strong>Rätsel:</strong> Der Schlüssel ist ein Wort mit <em>10 Buchstaben</em>. Es setzt sich aus drei Teilen zusammen:</p>
+          <ol>
+            <li><strong>Teil A:</strong> Das Gegenteil von „Schuldig“. (6 Buchstaben)</li>
+            <li><strong>Teil B:</strong> Der Anfangsbuchstabe des Alphabets. (1 Zeichen)</li>
+            <li><strong>Teil C:</strong> Das englische Wort für „Erlebnis“. (3 Buchstaben)</li>
+          </ol>
+          <p class="clue">Tipp: Schreibe alles zusammen, ohne Leerzeichen. Umlaute als normale Buchstaben (ä → a, ö → o, ü → u).</p>
+
+          <div class="inputRow">
+            <input id="answer" type="text" placeholder="Deine Lösung hier eingeben" aria-label="Lösung eingeben" />
+            <button id="checkBtn" aria-label="Lösung prüfen">Prüfen</button>
+            <button id="hintBtn" class="secondary" aria-label="Hinweis anzeigen">Hinweis</button>
+          </div>
+          <div id="status" class="status" role="status" aria-live="polite"></div>
+
+          <div id="success" class="success">
+            <h2>🎉 Geschafft!</h2>
+            <p>
+              Du hast die geheime Einladung freigeschaltet: <strong>JURYEXPERIENCE</strong>.
+            </p>
+            <p>
+              Halte dich bereit – deine <em>Jury Experience</em> wartet. Die genauen Details bekommst du mit deinem Gutschein.
+            </p>
+            <p class="small mono">Code: JURY-INVITE-2025</p>
+          </div>
+        </div>
+
+        <div class="footer">
+          <p>Optional: Scanne den QR-Code (falls beigelegt) oder gib den Code oben auf der Geschenkkarte ein.</p>
+          <p class="small">Wenn du nicht weiterkommst: Der gesuchte Begriff ist ein zusammengesetztes Wort aus Recht und Abenteuer.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Lösung: Wir akzeptieren mehrere Schreibweisen von 'jury experience'.
+    const acceptedSolutions = [
+      'juryexperience',
+      'juryexp',
+      'jury-experience', 'jury experience', 'juryexperience2025'
+    ];
+
+    // Easter Egg entsprechend der 3 Teile im Rätsel:
+    const easterEggs = ['freispruchaexp'];
+
+    const input = document.getElementById('answer');
+    const status = document.getElementById('status');
+    const success = document.getElementById('success');
+    const btn = document.getElementById('checkBtn');
+    const hintBtn = document.getElementById('hintBtn');
+
+    function normalize(s) {
+      return (s || '')
+        .toLowerCase()
+        .replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u')
+        .replace(/\\s+/g, '')
+        .replace(/[-_]/g, '');
+    }
+
+    function confetti() {
+      // leichte Konfetti-Animation ohne externe Bibliotheken
+      const count = 150;
+      for (let i = 0; i < count; i++) {
+        const span = document.createElement('span');
+        span.textContent = '•';
+        span.style.position = 'fixed';
+        span.style.left = Math.random() * 100 + 'vw';
+        span.style.top = '-5vh';
+        span.style.fontSize = (Math.random() * 18 + 10) + 'px';
+        span.style.color = Math.random() > 0.5 ? '#ffd166' : '#ef476f';
+        span.style.transition = 'transform 1.6s cubic-bezier(.2,.8,.2,1), opacity 1.8s';
+        document.body.appendChild(span);
+        const x = (Math.random() * 40 - 20);
+        const y = (Math.random() * 90 + 60);
+        setTimeout(() => {
+          span.style.transform = `translate(${x}vw, ${y}vh) rotate(${Math.random()*360}deg)`;
+          span.style.opacity = '0';
+        }, 10);
+        setTimeout(() => span.remove(), 2000);
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      const value = normalize(input.value);
+      if (!value) {
+        status.textContent = 'Bitte gib eine Lösung ein.';
+        status.className = 'status hint';
+        return;
+      }
+      if (acceptedSolutions.includes(value)) {
+        status.textContent = 'Richtig! Einladung freigeschaltet.';
+        status.className = 'status';
+        success.style.display = 'block';
+        confetti();
+      } else if (easterEggs.includes(value)) {
+        status.textContent = 'Interessant – du hast den alternativen Schlüssel gefunden!';
+        status.className = 'status';
+        success.style.display = 'block';
+        confetti();
+      } else {
+        status.textContent = 'Nicht ganz. Tipp: Denke an Recht & Erlebnis.';
+        status.className = 'status hint';
+      }
+    });
+
+    hintBtn.addEventListener('click', () => {
+      status.innerHTML = 'Hinweis: <span class="mono">jury</span> + <span class="mono">experience</span> (engl.).';
+      status.className = 'status';
+    });
+
+    // Enter-Taste erlaubt
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') btn.click();
+    });
+  </script>
+</</body>
